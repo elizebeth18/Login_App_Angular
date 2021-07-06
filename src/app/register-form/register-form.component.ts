@@ -14,11 +14,12 @@ export class RegisterFormComponent {
 
     mymodel = new RegisterModal('John', 'j@gmail.com', '12345678');
 
-    constructor(private registerService: RegisterService){}
+    constructor(private registerService: RegisterService,
+                private router: Router){}
 
     registerForm(form: NgForm) : void {
         this.registerService.registerUser(form.value)
-            .subscribe((res)=> console.log("data posted"));
+            .subscribe((res)=> this.router.navigate(['/login']));
     }
     
 

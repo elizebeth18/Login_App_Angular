@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login-form/login.service'
 
 @Component({
     selector: 'app-cust',
@@ -6,7 +7,15 @@ import { Component } from '@angular/core';
 })
 
 
-export class ProfileComponent  {
+export class ProfileComponent implements OnInit {
+    userinfo;
+    token: string;
 
-   
+    constructor(private loginService: LoginService){}
+
+    ngOnInit(){
+        this.token = localStorage.getItem('TOKEN_NUMBER');
+        this.loginService.getUserRole(this.token)
+                .subscribe((response) => this.userinfo = response)
+    }
 }
